@@ -108,7 +108,7 @@ fn star_1_2() {
             if !winner {
                 repeat = false;
             }
-            println!("{:?}", bingo_boards);
+            //println!("{:?}", bingo_boards);
         }
     }
 }
