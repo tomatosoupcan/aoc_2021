@@ -24,13 +24,10 @@ fn star_2(days: i64) {
     for fish in school {
         fish_days[fish] += 1;
     }
-    //println!("Initial Fish Days: {:?}", &fish_days);
     for _day in 1..days+1 {
-        let push_it = fish_days[0];
-        fish_days.drain(0..1);
+        let push_it = fish_days.remove(0);
         fish_days.push(push_it);
         fish_days[6] += push_it;
-        //println!("Fish Day {}: {:?}",&_day, &fish_days);
     }
     println!("Fish Count {}", fish_days.iter().sum::<u64>());
 
