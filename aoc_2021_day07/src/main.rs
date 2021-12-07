@@ -25,11 +25,7 @@ fn mean(vec: &Vec<i32>) -> i32 {
 }
 
 fn sum_up(number: i32) -> i32 {
-    let mut output = 0;
-    for numb in 1..number+1 {
-        output+=numb;
-    }
-    output
+    (number*(number+1))/2
 }
 
 fn star_1() {
