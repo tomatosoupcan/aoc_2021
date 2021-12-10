@@ -70,10 +70,10 @@ fn star_1_2() {
     let mut total_score: u64 = 0;
     for line in corrupted {
         total_score += match find_mismatch(line) {
-            ')' => 3,
-            ']' => 57,
-            '}' => 1197,
-            '>' => 25137,
+            '(' | ')' => 3,
+            '[' | ']' => 57,
+            '{' | '}' => 1197,
+            '<' | '>' => 25137,
             _=> 0
         }
     }
