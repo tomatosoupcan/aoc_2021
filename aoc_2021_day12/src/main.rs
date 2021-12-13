@@ -23,32 +23,26 @@ fn star_1_2() {
     let input = read_a_file("C:/input/input.txt").unwrap();
     let mut conn_vec = Vec::new();
     for line in input {
-        let start = line
-            .split("-")
-            .collect::<Vec<&str>>()[0]
-            .clone()
-            .to_string();
-        let end = line
-            .split("-")
-            .collect::<Vec<&str>>()[1]
-            .clone()
-            .to_string();
+        let (start, end) = line
+            .split_once("-")
+            .map(|x| (x.0.to_string(),x.1.to_string()))
+            .unwrap();
         let new_conn = Connection { start, end };
         conn_vec.push(new_conn);
     }
-    let mut routes = Vec::new();
+    let mut routes = 0;
     dig_route("start".to_string(),
               &mut vec!["start".to_string()],
               &conn_vec, &mut routes,
     false);
-    println!("Route count 1: {}", routes.len());
+    println!("Route count 1: {}", routes);
 
-    routes = Vec::new();
+    routes = 0;
     dig_route("start".to_string(),
               &mut vec!["start".to_string()],
               &conn_vec, &mut routes,
               true);
-    println!("Route count 2: {}", routes.len());
+    println!("Route count 2: {}", routes);
 }
 
 fn is_lower(chs: &str) -> bool {
@@ -62,10 +56,10 @@ fn is_lower(chs: &str) -> bool {
 fn dig_route(current: String,
              path: &mut Vec<String>,
              conn_vec: & Vec<Connection>,
-             routes: &mut Vec<Vec<String>>,
+             routes: &mut i32,
              single_small: bool)
 {
-    if current == "end" { routes.push(path.clone()); return }
+    if current == "end" { *routes+=1; return }
     for conn in conn_vec {
         if current == conn.start && conn.end != "start"
         && (!path.contains(&conn.end) || !is_lower(&conn.end) || single_small)
