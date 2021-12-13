@@ -1,6 +1,7 @@
 use std::fs;
 use std::io::BufReader;
 use std::io::BufRead;
+use std::collections::HashSet;
 
 fn read_a_file(filename: &str) -> std::io::Result<Vec<String>> {
     let file = fs::File::open(filename)?;
@@ -15,7 +16,7 @@ fn read_a_file(filename: &str) -> std::io::Result<Vec<String>> {
 
 fn star_1_2() {
     let input = read_a_file("C:/input/input.txt").unwrap();
-    let mut coordinates = Vec::new();
+    let mut coordinates = HashSet::new();
     let mut folds = Vec::new();
     let mut coordinating = true;
     for line in input {
@@ -26,7 +27,7 @@ fn star_1_2() {
                 .map(|x| (x.0.parse::<i32>().unwrap()
                           ,x.1.parse::<i32>().unwrap()))
                 .unwrap();
-            coordinates.push((x,y));
+            coordinates.insert((x,y));
         }
         else {
             let temp_line = line.replace("fold along ","");
@@ -40,21 +41,16 @@ fn star_1_2() {
     }
     let mut first_fold = true;
     for fold in folds {
-        //println!("Folding {} at {}", fold.0, fold.1);
-        for coord in coordinates.iter_mut() {
+        for coord in coordinates.clone() {
             if fold.0 == 'y' && coord.1 > fold.1 {
-                //print!("Moving {:?} to ", coord);
-                *coord = (coord.0, fold.1-((coord.1-fold.1)%(fold.1+1)));
-                //print!("{:?}\n", coord);
+                coordinates.remove(&coord);
+                coordinates.insert((coord.0, fold.1-((coord.1-fold.1)%(fold.1+1))));
             }
             if fold.0 == 'x' && coord.0 > fold.1 {
-                //print!("Moving {:?} to ", coord);
-                *coord = (fold.1-((coord.0-fold.1)%(fold.1+1)) ,coord.1);
-                //print!("{:?}\n", coord);
+                coordinates.remove(&coord);
+                coordinates.insert((fold.1-((coord.0-fold.1)%(fold.1+1)), coord.1));
             }
         }
-        coordinates.sort();
-        coordinates.dedup();
         if first_fold {
             first_fold = false;
             println!("First Fold Count: {}", coordinates.len());
