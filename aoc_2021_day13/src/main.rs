@@ -50,12 +50,12 @@ fn star_1_2() {
             let mut temp_x = coord.0;
             let mut temp_y = coord.1;
             if fold.0 == 'y' && coord.1 > fold.1  {
-                temp_y = fold.1-((coord.1-fold.1)%(fold.1+1));
+                temp_y = fold.1-(coord.1-fold.1);
                 coordinates.remove(&coord);
                 coordinates.insert((coord.0, temp_y));
             }
             if fold.0 == 'x' && coord.0 > fold.1 {
-                temp_x = fold.1-((coord.0-fold.1)%(fold.1+1));
+                temp_x = fold.1-(coord.0-fold.1);
                 coordinates.remove(&coord);
                 coordinates.insert((temp_x, coord.1));
             }
