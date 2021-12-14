@@ -69,7 +69,7 @@ fn check_for_win(board_list: Vec<Vec<Vec<i64>>>, number: i64) -> (bool, i64, Vec
 }
 
 fn star_1_2() {
-    let input = read_a_file("C:/input/input.txt").unwrap();
+    let input = read_a_file("C:/input/input04.txt").unwrap();
     let mut number_order = Vec::new();
     let mut board = Vec::new();
     let mut bingo_boards: Vec<Vec<Vec<i64>>> = Vec::new();

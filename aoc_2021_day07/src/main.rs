@@ -29,7 +29,7 @@ fn sum_up(number: i32) -> i32 {
 }
 
 fn star_1() {
-    let input: Vec<i32> = read_a_file("C:/input/input.txt").unwrap()[0]
+    let input: Vec<i32> = read_a_file("C:/input/input07.txt").unwrap()[0]
         .split(",")
         .map(|x| x.parse::<i32>().unwrap()).collect();
     let med_val = median(&input);

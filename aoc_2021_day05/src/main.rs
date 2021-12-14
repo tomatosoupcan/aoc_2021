@@ -62,7 +62,7 @@ fn read_a_file(filename: &str) -> std::io::Result<Vec<String>> {
 }
 
 fn star_1(straight: bool) {
-    let input = read_a_file("C:/input/inputtest.txt").unwrap();
+    let input = read_a_file("C:/input/input05.txt").unwrap();
     let mut lines: Vec<Line> = Vec::new();
     for line in input {
         let point1g = line.split(" -> ").collect::<Vec<&str>>()[0];

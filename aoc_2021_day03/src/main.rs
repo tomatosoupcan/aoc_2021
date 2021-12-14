@@ -53,7 +53,7 @@ fn binary_string_to_decimal(input: &str) -> i64 {
 }
 
 fn star_1() {
-    let input = read_a_file("C:/input/input.txt").unwrap();
+    let input = read_a_file("C:/input/input03.txt").unwrap();
     let mut vec2d = Vec::new();
     let mut gamma_rate = String::new();
     let mut epsilon_rate = String::new();

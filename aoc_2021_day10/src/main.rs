@@ -41,7 +41,7 @@ fn find_mismatch (input: String) -> char {
 }
 
 fn star_1_2() {
-    let mut input = read_a_file("C:/input/input.txt").unwrap();
+    let mut input = read_a_file("C:/input/input10.txt").unwrap();
     for index in 0..input.len() {
         let mut replacing = true;
         while replacing {

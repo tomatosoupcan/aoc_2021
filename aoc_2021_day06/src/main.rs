@@ -19,7 +19,7 @@ fn star_1(days: i64) {
 
 fn star_2(days: i64) {
     let mut fish_days: Vec<u64> = vec![0;9];
-    read_a_file("C:/input/input.txt").unwrap()[0]
+    read_a_file("C:/input/input06.txt").unwrap()[0]
         .split(",")
         .map(|x| x.parse::<usize>().unwrap())
         .for_each(|fish| fish_days[fish] +=1);

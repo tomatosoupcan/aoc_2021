@@ -14,7 +14,7 @@ fn read_a_file(filename: &str) -> std::io::Result<Vec<String>> {
 }
 
 fn star_1_2(stop_point: i32) {
-    let input = read_a_file("C:/input/input.txt").unwrap();
+    let input = read_a_file("C:/input/input11.txt").unwrap();
     let mut energy_grid = Vec::new();
     let mut top_bottom = Vec::new();
     for _ in 0..input[0].len()+2 {

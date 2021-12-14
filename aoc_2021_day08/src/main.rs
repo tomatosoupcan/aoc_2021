@@ -111,7 +111,7 @@ fn decoder(coded: Vec<String>, decode: Vec<String>) -> i32 {
 
 
 fn star_1() {
-    let input = read_a_file("C:/input/input.txt").unwrap();
+    let input = read_a_file("C:/input/input08.txt").unwrap();
     let mut outputs_vec = Vec::new();
     for line in input {
         let right = &line.split(" | ").map(|s| s.to_string()).collect::<Vec<String>>()[1];

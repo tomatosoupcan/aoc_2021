@@ -15,7 +15,7 @@ fn read_a_file(filename: &str) -> std::io::Result<Vec<String>> {
 }
 
 fn star_1(modifier: &str) {
-    let input = read_a_file("C:/input/input.txt").unwrap();
+    let input = read_a_file("C:/input/input02.txt").unwrap();
     let mut depth = 0;
     let mut distance = 0;
     let mut aim = 0;

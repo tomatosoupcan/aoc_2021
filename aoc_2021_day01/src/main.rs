@@ -33,7 +33,7 @@ fn star_2(input: Vec<i64>) {
 }
 
 fn main() {
-    let input = read_a_file("C:/input/input.txt").unwrap();
+    let input = read_a_file("C:/input/input01.txt").unwrap();
     star_1(input.clone());
     star_2(input.clone());
 }

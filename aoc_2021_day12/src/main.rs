@@ -20,7 +20,7 @@ fn read_a_file(filename: &str) -> std::io::Result<Vec<String>> {
 }
 
 fn star_1_2() {
-    let input = read_a_file("C:/input/input.txt").unwrap();
+    let input = read_a_file("C:/input/input12.txt").unwrap();
     let mut conn_vec = Vec::new();
     for line in input {
         let (start, end) = line

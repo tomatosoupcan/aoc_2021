@@ -44,7 +44,7 @@ fn iter_basin_sum(y: usize, x: usize, map: &mut Vec<Vec<i32>>) -> i32 {
 }
 
 fn star_1() {
-    let input = read_a_file("C:/input/input.txt").unwrap();
+    let input = read_a_file("C:/input/input09.txt").unwrap();
     let mut height_vec = Vec::new();
     let mut top_bottom = Vec::new();
     for _ in 0..input[0].len()+2 {
