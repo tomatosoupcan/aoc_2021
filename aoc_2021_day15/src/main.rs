@@ -51,7 +51,7 @@ fn read_a_file(filename: &str) -> std::io::Result<Vec<String>> {
     return Ok(vec);
 }
 
-fn advancer(line: Vec<u32>) -> Vec<u32> {
+fn advance_it(line: Vec<u32>) -> Vec<u32> {
     let mut temp_line = line.clone();
     for i in 0..temp_line.len() {
         temp_line[i] += 1;
@@ -66,14 +66,14 @@ fn expander(grid: &mut Vec<Vec<u32>>, times: u8) {
     for i in 0..grid.len() {
         let mut temp_line = grid[i].clone();
         for _ in 0..times - 1 {
-            temp_line = advancer(temp_line);
+            temp_line = advance_it(temp_line);
             grid[i].extend(temp_line.clone());
         }
     }
     let o_len = grid.len();
     for a in 0..times - 1 {
         for i in (a as usize * o_len as usize)..((a as usize + 1) * o_len as usize) {
-            let temp_line = advancer(grid[i].clone());
+            let temp_line = advance_it(grid[i].clone());
             grid.push(temp_line);
         }
     }
