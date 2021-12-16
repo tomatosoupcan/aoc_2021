@@ -131,27 +131,9 @@ fn pro(structure: &TrData) -> i64 {
         1 => subs.fold(1, |acc, x| x * acc),
         2 => subs.min().unwrap(),
         3 => subs.max().unwrap(),
-        5 => {
-            if pro(&subs_s[0]) > pro(&subs_s[1]) {
-                1
-            } else {
-                0
-            }
-        }
-        6 => {
-            if pro(&subs_s[0]) < pro(&subs_s[1]) {
-                1
-            } else {
-                0
-            }
-        }
-        7 => {
-            if pro(&subs_s[0]) == pro(&subs_s[1]) {
-                1
-            } else {
-                0
-            }
-        }
+        5 => (pro(&subs_s[0]) > pro(&subs_s[1])) as i64,
+        6 => (pro(&subs_s[0]) < pro(&subs_s[1])) as i64,
+        7 => (pro(&subs_s[0]) == pro(&subs_s[1])) as i64,
         _ => structure.literal,
     };
 }
