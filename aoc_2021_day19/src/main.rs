@@ -327,6 +327,7 @@ fn star_1(input: Vec<String>) {
             break 'outer;
         }
         for index in 0..scanners.len() - 1 {
+            println!("Checking against {}", index);
             let scanner = scanners[index].clone();
             for scanner2 in &mut scanners {
                 if scanner == *scanner2 {
@@ -350,7 +351,7 @@ fn star_1(input: Vec<String>) {
                             }
                         }
                     }
-                    if distance_count >= 12 {
+                    if distance_count >= 11 {
                         println!("Overlapped with Scanner {}: {:?}", index, hash);
                         println!("Scanner {}: Position {:?}", index, scanner.position);
                         let single_compare = hash.into_iter().collect::<Vec<(&Point, &Point)>>()[0];
@@ -404,5 +405,5 @@ fn star_1(input: Vec<String>) {
 }
 
 fn main() {
-    star_1(read_a_file("C:/input/input_test.txt").unwrap());
+    star_1(read_a_file("C:/input/input19.txt").unwrap());
 }
