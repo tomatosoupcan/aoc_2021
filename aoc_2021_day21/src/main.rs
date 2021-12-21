@@ -16,12 +16,9 @@ fn read_a_file(filename: &str) -> std::io::Result<Vec<String>> {
 
 fn star_1(file: &str) {
     let input = read_a_file(file).unwrap();
-    let mut die_val = 100;
-    let mut die_rolls = 0;
     let mut p1_position = input[0].split_once(": ").unwrap().1.parse::<i32>().unwrap();
     let mut p2_position = input[1].split_once(": ").unwrap().1.parse::<i32>().unwrap();
-    let mut p1_score = 0;
-    let mut p2_score = 0;
+    let (mut die_val, mut die_rolls, mut p1_score, mut p2_score) = (100, 0, 0, 0);
     let mut player = false;
     while p1_score < 1000 && p2_score < 1000 {
         player = !player;
@@ -36,12 +33,8 @@ fn star_1(file: &str) {
                 p2_position += die_val;
             }
         }
-        while p1_position > 10 {
-            p1_position -= 10;
-        }
-        while p2_position > 10 {
-            p2_position -= 10;
-        }
+        p1_position = (p1_position - 1) % 10 + 1;
+        p2_position = (p2_position - 1) % 10 + 1;
         if player {
             p1_score += p1_position;
         } else {
@@ -75,10 +68,7 @@ fn process_game(
         return (0, 1);
     }
     let (mut wins1, mut wins2) = (0, 0);
-    let mut p1_temp;
-    let mut p2_temp;
-    let mut p1_temp_score;
-    let mut p2_temp_score;
+    let (mut p1_temp, mut p2_temp, mut p1_temp_score, mut p2_temp_score);
     for moves in roll_combos {
         if turn {
             p1_temp = p1_pos + moves.0;
@@ -87,12 +77,8 @@ fn process_game(
             p1_temp = p1_pos;
             p2_temp = p2_pos + moves.0;
         }
-        while p1_temp > 10 {
-            p1_temp -= 10
-        }
-        while p2_temp > 10 {
-            p2_temp -= 10
-        }
+        p1_temp = (p1_temp - 1) % 10 + 1;
+        p2_temp = (p2_temp - 1) % 10 + 1;
         if turn {
             p1_temp_score = p1_score + p1_temp;
             p2_temp_score = p2_score;
