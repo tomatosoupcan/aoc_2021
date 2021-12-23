@@ -1,9 +1,5 @@
 use std::collections::HashMap;
 
-fn manhattan(point1: (i32, i32), point2: (i32, i32)) -> i32 {
-    return (point1.0 - point2.0).abs() + (point1.1 - point2.1).abs();
-}
-
 fn check_finished(rooms: &Vec<Vec<char>>) -> bool {
     let mut result = true;
     for index in 0..4 {
@@ -38,21 +34,139 @@ fn star_2() {
 }
 
 fn rec_move(hw: &Vec<char>, rm: &Vec<Vec<char>>, score: u64, scores: &mut Vec<u64>) {
+    if check_finished(rm) {
+        scores.push(score);
+        return;
+    }
     let mut rooms = rm.clone();
     let mut hall = hw.clone();
     for index in 0..rooms.len() {
         let room = &mut rooms[index];
         if !check_room(&room, index) {
-            let working_char = room.remove(0);
-            room.insert(0, '.');
-            for hw_index in 0..hall.len() {
-                if index == 0 && hw_index == 0 && hw[1] == '.' && hw[0] == '.' {
-                    hall[hw_index] = working_char;
-                }
+            for space in available_spaces_from_room(&hall, index) {
+                hall[space] = room.remove(0);
+                //TODO: Find the absolute distance of the move
+                rec_move(
+                    &hall,
+                    &rooms,
+                    score + value_from_char(hall[space], 0),
+                    scores,
+                );
             }
         }
     }
-    println!("{:?}", rooms);
+    return;
+}
+
+fn value_from_char(ch: char, dist: u64) -> u64 {
+    dist * match ch {
+        'A' => 1,
+        'B' => 10,
+        'C' => 100,
+        'D' => 1000,
+        _ => 0,
+    }
+}
+
+fn available_spaces_from_room(hw_t: &Vec<char>, room: usize) -> Vec<usize> {
+    let mut spaces = Vec::new();
+    let hw = hw_t.iter().map(|x| *x == '.').collect::<Vec<bool>>();
+    spaces.push(7); // use something ooi to indicate checking the final location move
+    for hw_index in 0..hw.len() {
+        if room == 0 {
+            if hw[0] && hw[1] {
+                spaces.push(0);
+            }
+            if hw[1] {
+                spaces.push(1);
+            }
+            if hw[2] {
+                spaces.push(2);
+            }
+            if hw[3] && hw[2] {
+                spaces.push(3);
+            }
+            if hw[4] && hw[3] && hw[2] {
+                spaces.push(4);
+            }
+            if hw[5] && hw[4] && hw[3] && hw[2] {
+                spaces.push(5);
+            }
+            if hw[6] && hw[5] && hw[4] && hw[3] && hw[2] {
+                spaces.push(6)
+            }
+        }
+        if room == 1 {
+            if hw[0] && hw[1] && hw[2] {
+                spaces.push(0)
+            }
+            if hw[1] && hw[2] {
+                spaces.push(1)
+            }
+            if hw[2] {
+                spaces.push(2);
+            }
+            if hw[3] {
+                spaces.push(3);
+            }
+            if hw[4] && hw[3] {
+                spaces.push(4);
+            }
+            if hw[5] && hw[4] && hw[3] {
+                spaces.push(5);
+            }
+            if hw[6] && hw[5] && hw[4] && hw[3] {
+                spaces.push(4);
+            }
+        }
+        if room == 2 {
+            if hw[0] && hw[1] && hw[2] && hw[3] {
+                spaces.push(0);
+            }
+            if hw[1] && hw[2] && hw[3] {
+                spaces.push(1);
+            }
+            if hw[2] && hw[3] {
+                spaces.push(2);
+            }
+            if hw[3] {
+                spaces.push(3);
+            }
+            if hw[4] {
+                spaces.push(4);
+            }
+            if hw[4] && hw[5] {
+                spaces.push(5);
+            }
+            if hw[4] && hw[5] && hw[6] {
+                spaces.push(6);
+            }
+        }
+        if room == 3 {
+            if hw[0] && hw[1] && hw[2] && hw[3] && hw[4] {
+                spaces.push(0);
+            }
+            if hw[1] && hw[2] && hw[3] && hw[4] {
+                spaces.push(1);
+            }
+            if hw[2] && hw[3] && hw[4] {
+                spaces.push(2);
+            }
+            if hw[3] && hw[4] {
+                spaces.push(3);
+            }
+            if hw[4] {
+                spaces.push(4);
+            }
+            if hw[5] {
+                spaces.push(5);
+            }
+            if hw[5] && hw[6] {
+                spaces.push(6);
+            }
+        }
+    }
+    return vec![0];
 }
 
 fn main() {
